@@ -1,0 +1,327 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    /* 16px이 기본값, 크롬에서 10이하는 변화 없음 */
+}
+
+.clearfix::after {
+    /* 인라인요소 */
+    content: "";
+    clear: both;
+    display: block;
+}
+
+
+/* reset */
+li {
+    list-style: none;
+}
+
+/* 블릿문자 삭제 */
+
+a {
+    color: #333;
+    text-decoration: none;
+    /* 밑줄 삭제 */
+}
+
+
+/* wrap */
+#wrap {
+    width: 1000px;
+    margin: 0 auto;
+    /* 중앙에 옴 */
+}
+
+/* 📍 header */
+#header {}
+
+#header h1 {
+    float: left;
+    /* 블록요소라서 한줄 다 차지함 나란히 정렬하려면 h1에도 플롯을 줘야 한다 */
+    width: 120px;
+}
+
+#header h1 a img {
+    width: 100%;
+}
+
+#header .nav {
+    float: right;
+    text-align: center;
+    /* 자신X 자식 중 인라인요소를 중앙 정렬 명령은 블록요소한테 한다? */
+    /* 블록 요소의 중앙 정렬은 margin-auto */
+    margin-top: 20px;
+}
+
+#header .nav ul {}
+
+#header .nav ul li {
+    position: relative;
+    float: left;
+    width: 120px;
+}
+
+#header .nav ul li a {
+    /* a태그는 인라인 요소 */
+    background-color: #ccc;
+    display: block;
+    /* 이게 없으면 글자에만 태그가 걸림 근데 블락을 하면 칸 전체에 태그됨 */
+    padding: 20px 15px;
+    transition: 0.3s;
+    /* = 300ms */
+}
+
+#header .nav ul li a:hover {
+    background-color: #ddd;
+}
+
+#header .nav ul li .submenu {
+    display: none;
+    position: absolute;
+    top: 60;
+    left: 0;
+    z-index: 10;
+    /* position이 있어야 실행됨 */
+}
+
+/* 📍 banner */
+#banner {
+    height: 378px;
+    overflow: hidden;
+}
+
+#banner .slidelist {
+    position: relative;
+}
+
+#banner .slidelist .slideImg {
+    position: relative;
+}
+
+#banner .slidelist .slideImg h2 {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px 30px;
+    border-radius: 20px;
+    color: #fff;
+}
+
+#banner .slidelist .slideImg img {
+    /* img태그는 인라인 요소인데 넓이를 인식한다 */
+    width: 100%;
+    /* 페이지 크기에 100% 맞춤 */
+    display: block;
+}
+
+/* ✨ img태그의 특징
+인라인요소(글자와 같은 성질) : 예측하지 못하는 공간을 가지고 있음
+해결 방법
+1. display:block;
+2. vertical-align:middle or top; */
+
+
+/* 📍 content */
+#content1 {
+    margin-top: 15px;
+}
+
+#content1 .notice {
+    position: relative;
+    border: 1px solid #ccc;
+    height: 218px;
+    float: left;
+    width: 49%;
+    box-sizing: border-box;
+    /* 패딩 안에 선이 들어온다 */
+    padding: 30px;
+}
+
+#content1 .notice ul {}
+
+#content1 .notice ul li {
+    float: left;
+    margin-right: 10px;
+}
+
+#content1 .notice ul li a {
+    font-size: 24px;
+    color: #999;
+    font-weight: bold;
+}
+
+#content1 .notice ul li.active a {
+    color: #000;
+}
+
+#content1 .notice ul li ul {
+    position: absolute;
+    left: 30px;
+    top: 70px;
+}
+
+#content1 .notice ul li ul li {}
+
+#content1 .notice ul li ul li a {
+    font-size: 16px;
+    float: left;
+    width: 68%;
+    /* 말줄임말 세트 */
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    /* 말줄임말 세트*/
+
+    font-weight: normal;
+    /* 폰트 두께 초기화 */
+}
+
+#content1 .notice ul li ul li span {
+    float: right;
+
+}
+
+
+/* 📍ad.img */
+#content1 .ad {
+    background-color: #993030;
+    height: 218px;
+    float: right;
+    width: 49%;
+}
+
+#content1 .ad a img {
+    width: 100%;
+}
+
+
+/* 📍 팝업 */
+.layer-bg {
+    display: none;
+    position: fixed;
+    /* 화면이 부모 화면을 꽉 채움 */
+    left: 0;
+    /* 내 왼쪽과 부모의 왼쪽 */
+    top: 0;
+    right: 0;
+    /* 내 오른쪽과 부모의 오른쪽 */
+    bottom: 0;
+    /* 나의 바닥과 부모의 바닥의 거리 부모의 안쪽이 기준 */
+    /* left right top bottom = 0 = width: 100%;, height:100% ; */
+    background-color: rgba(0, 0, 0, 0.8);
+    /* 내 왼쪽을 부모 왼쪽에 붙이고 나의 머리를 부모 머리에 붙이고 내 오른쪽을 위를 아래를 다 붙임 부모와 나의 거리가 0 부모를 꽉 채움 */
+}
+
+.layer-bg .layer {
+    /* 자식이 position: absolute;일 때 기준이 되는 부모가 position:static;가 기본값인데 position이 relative, absolute, fixed라면 기준이 될 수 있다
+    position:static;일 때는 기준이 될 수 있다 */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    /* left+top+transform 흰색 배경이 중앙에 옴 */
+    width: 500px;
+    height: 500px;
+    background-color: #fff;
+    padding: 30px;
+}
+
+.layer-bg .layer h2 {
+    font-size: 35px;
+}
+
+.layer-bg .layer .close {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    /* 부모의 밑과 오른쪽에서 30픽셀 떨어져있겠다 */
+    font-weight: bold;
+    font-size: 30px;
+}
+
+
+#content2 {}
+
+#content2 h2 {}
+
+#content2 ul {}
+
+#content2 ul li {
+    float: left;
+    width: 24.25%;
+    margin-right: 1%;
+}
+
+#content2 ul li:last-child {
+    margin-right: 0;
+}
+
+#content2 ul li div {
+    overflow: hidden;
+    /* 사진이 칸 안에서만 커짐 */
+}
+
+#content2 ul li div img {
+    width: 100%;
+    transition: 0.3s;
+}
+
+#content2 ul li div:hover img {
+    transform: scale(1.2);
+    /* 120% */
+
+}
+
+#content2 ul li span {}
+
+
+
+/* 📍 footer */
+
+#footer {
+    padding: 30px 0;
+    margin-top: 30px;
+    border-top: 1px solid #ccc;
+    /* 위쪽만 선 생김 */
+    /* 
+    border: 1px solid #ccc;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ccc; */
+}
+
+#footer address {
+    /* address태그는 원래 기울림체라서 일반으로 바꿔줘야 한다 */
+    font-style: normal;
+}
+
+#footer address ul {
+    width: 535px;
+
+}
+
+#footer address ul li {
+    /* inline요소는 공간을 인식하지 못한다 패딩, 마진의 상하값이 적용 안 됨 좌우값은 적용됨 그래서 밑에 있는 카피라이트가 안 밀림
+    dispaly-inline-block; 인라인요소이나 블록요소처럼 넓이를 인식한다 */
+    display: inline; /* 내가 예측하지 못하는 공간을 가지고 있음 */
+    padding: 0 15px 0 10px;
+}
+
+#footer address p {
+    text-transform: uppercase;
+    /* 대문자 */
+    /* text-transform: lowercase; 소문자 */
+    padding-top: 30px;
+    
+}
+
+#footer address ul li.left {
+    padding-left: 0;
+}
+
